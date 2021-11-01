@@ -21,16 +21,9 @@ export const selectCollectionsForPreview = createSelector(
     collections => Object.keys(collections).map(key => collections[key])
   );
 
-// export const selectCollection = memoize((collectionUrlParam) =>
-//     createSelector(
-//         [selectCollections],
-//         collections => collections[collectionUrlParam]
-//     )
-// );
-
-export const selectCollection = collectionUrlParams => (
+export const selectCollection = memoize((collectionUrlParam) =>
     createSelector(
         [selectCollections],
-        collections => collections.find(collection => collection.id === COLLECTION_ID_MAP[collectionUrlParams])
+        collections => collections[collectionUrlParam]
     )
-)
+);
